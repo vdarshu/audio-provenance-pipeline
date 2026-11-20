@@ -1,0 +1,11 @@
+# pipeline runtime (also installed into the Airflow image)
+librosa==0.10.2.post1
+soundfile>=0.12
+scipy>=1.11
+numpy>=1.26,<2.1
+pandas>=2.1
+pyarrow>=14
+pyspark==3.5.3
+psycopg2-binary>=2.9
+boto3>=1.34
+remotezip>=0.12

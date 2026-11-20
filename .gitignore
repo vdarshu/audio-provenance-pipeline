@@ -1,0 +1,16 @@
+# data and lake outputs are large; raw data is shared separately (see README)
+data/**
+!data/**/
+!data/**/.gitkeep
+lake/**
+!lake/.gitkeep
+
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+spark-warehouse/
+metastore_db/
+derby.log
+logs/
+.env

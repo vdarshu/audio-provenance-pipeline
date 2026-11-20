@@ -1,0 +1,97 @@
+# Local stack: Postgres + pgvector (gold layer and Airflow metadata) and
+# Airflow with LocalExecutor. The landing zone is the local data/landing folder.
+#
+#   docker compose up -d --build
+#   Airflow UI  http://localhost:8080   (admin / admin)
+#
+# Optional S3 landing zone (MinIO):
+#   MinIO removed its official images from Docker Hub in Sept 2026, so the
+#   MinIO services sit behind a profile and the image names are configurable.
+#   Point MINIO_IMAGE / MC_IMAGE at an image you trust, then:
+#     $env:LANDING_BACKEND="minio"; docker compose --profile minio up -d --build
+#   MinIO UI    http://localhost:9001   (minioadmin / minioadmin)
+
+x-airflow: &airflow
+  build:
+    context: .
+    dockerfile: docker/airflow.Dockerfile
+  environment: &airflow-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://pipeline:pipeline@postgres:5432/airflow
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+    AIRFLOW__CORE__DAGS_FOLDER: /opt/project/dags
+    PYTHONPATH: /opt/project
+    PROJECT_ROOT: /opt/project
+    PG_DSN: host=postgres port=5432 dbname=audio_lake user=pipeline password=pipeline
+    LANDING_BACKEND: ${LANDING_BACKEND:-local}
+    MINIO_ENDPOINT: http://minio:9000
+    SPARK_DRIVER_MEMORY: ${SPARK_DRIVER_MEMORY:-4g}
+    PIPELINE_WORKERS: ${PIPELINE_WORKERS:-4}
+  volumes:
+    - ./:/opt/project
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: pipeline
+      POSTGRES_PASSWORD: pipeline
+      POSTGRES_DB: audio_lake
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pipeline -d audio_lake"]
+      interval: 5s
+      retries: 20
+
+  minio:
+    image: ${MINIO_IMAGE:-pgsty/minio:latest}
+    profiles: ["minio"]
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports: ["9000:9000", "9001:9001"]
+    volumes:
+      - miniodata:/data
+
+  minio-init:
+    image: ${MC_IMAGE:-pgsty/mc:latest}
+    profiles: ["minio"]
+    depends_on: [minio]
+    entrypoint: >
+      /bin/sh -c "sleep 5 &&
+      mc alias set local http://minio:9000 minioadmin minioadmin &&
+      mc mb --ignore-existing local/landing"
+
+  airflow-init:
+    <<: *airflow
+    command: >
+      bash -c "airflow db migrate &&
+      airflow users create --username admin --password admin --firstname Admin
+      --lastname User --role Admin --email admin@example.com || true"
+
+  airflow-webserver:
+    <<: *airflow
+    command: webserver
+    ports: ["8080:8080"]
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow
+    command: scheduler
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+volumes:
+  pgdata:
+  miniodata:
