@@ -126,7 +126,8 @@ def validate_batch(batch_id):
 
         out = quality_path(batch_id)
         out.parent.mkdir(parents=True, exist_ok=True)
-        df.to_parquet(out, index=False)
+        df.to_parquet(out, index=False, coerce_timestamps="us",
+                      allow_truncated_timestamps=True)
 
         valid = int((df["qc_status"] == "pass").sum())
         ratio = valid / len(df)

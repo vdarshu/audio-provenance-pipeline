@@ -18,6 +18,7 @@ import argparse
 import os
 import time
 
+import pandas as pd
 from pyspark.sql import SparkSession, Row
 from pyspark.sql import functions as F
 from pyspark.sql import types as T
@@ -81,9 +82,16 @@ def build_silver(batch_id):
     lm_out = config.SILVER_DIR / "landmarks" / f"batch_id={batch_id}"
 
     with db.run_logged("silver_features", batch_id) as run:
-        bronze = spark.read.parquet(str(quality_path(batch_id)))
-        valid = bronze.filter(F.col("qc_status") == "pass").select("file_id", "bronze_path")
-        n_valid = valid.count()
+        # Only two columns are needed here. Reading them with pandas avoids Spark 3.5
+        # rejecting the nanosecond timestamps pandas writes elsewhere in the table.
+        quality = pd.read_parquet(quality_path(batch_id),
+                                  columns=["file_id", "bronze_path", "qc_status"])
+        quality = quality[quality["qc_status"] == "pass"]
+        valid = spark.createDataFrame(
+            list(quality[["file_id", "bronze_path"]].itertuples(index=False, name=None)),
+            "file_id string, bronze_path string",
+        )
+        n_valid = len(quality)
 
         # ~4 files per task keeps executors busy without huge per-task overhead
         n_parts = max(1, min(n_valid // 4, 400))

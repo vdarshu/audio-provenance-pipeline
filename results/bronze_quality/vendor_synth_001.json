@@ -1,0 +1,19 @@
+{
+  "batch_id": "vendor_synth_001",
+  "files": 356,
+  "valid": 348,
+  "valid_ratio": 0.9775,
+  "failure_reasons": {
+    "truncated": 3,
+    "silent": 3,
+    "too_short": 2,
+    "duplicate_in_batch": 2
+  },
+  "total_duration_h": 0.99,
+  "sample_rates": {
+    "22050": 318,
+    "8000": 28,
+    "16000": 8,
+    "44100": 2
+  }
+}

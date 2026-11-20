@@ -1,0 +1,29 @@
+{
+  "fma_metadata": {
+    "url": "https://os.unil.cloud.switch.ch/fma/fma_metadata.zip",
+    "member": "fma_metadata/tracks.csv",
+    "sha256": "f73260fd112b8cd42bcd4f7c8918fc66b19d9d4c7b97f4faedce524b59e95d6b",
+    "licence": "CC BY 4.0 (metadata); per-track licences listed in tracks.csv",
+    "downloaded_at": "2026-11-20T18:12:33.039728+00:00"
+  },
+  "fma_small_sample": {
+    "url": "https://os.unil.cloud.switch.ch/fma/fma_small.zip",
+    "published_archive_sha1": "ade154f733639d52e35e32f5593efe5be76c6d70",
+    "tracks": 744,
+    "bytes": 737599170,
+    "sampling": "93 tracks per genre_top, pandas sample random_state=42",
+    "file_list": "fma_small_sample_files.csv",
+    "integrity": "zip CRC-32 verified per file on extraction; sha256 per file in file_list",
+    "licence": "per-track Creative Commons licences (see tracks.csv)",
+    "downloaded_at": "2026-11-20T18:12:33.040034+00:00"
+  },
+  "librispeech_dev_clean": {
+    "url": "https://www.openslr.org/resources/12/dev-clean.tar.gz",
+    "file": "dev-clean.tar.gz",
+    "bytes": 337926286,
+    "md5": "42e2234ba48799c1f50f24a7926300a1",
+    "checksum_matches_published": true,
+    "licence": "CC BY 4.0",
+    "downloaded_at": "2026-11-20T18:18:44.904318+00:00"
+  }
+}

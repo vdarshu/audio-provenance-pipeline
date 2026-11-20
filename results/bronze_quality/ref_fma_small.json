@@ -1,0 +1,12 @@
+{
+  "batch_id": "ref_fma_small",
+  "files": 700,
+  "valid": 700,
+  "valid_ratio": 1.0,
+  "failure_reasons": {},
+  "total_duration_h": 5.83,
+  "sample_rates": {
+    "44100": 667,
+    "48000": 33
+  }
+}

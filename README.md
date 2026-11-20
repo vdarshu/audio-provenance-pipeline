@@ -119,3 +119,21 @@ Needs Python 3.11, Java 17 (for Spark), ffmpeg and a Postgres 16 with pgvector. 
 - Pitch-invariant matching (the main gap; see docs/03)
 - Scale test on the full `fma_small` / `fma_medium` (the mid-submission runs on a 750-track sample): Silver throughput and hash-lookup latency
 - Technical report and executive presentation
+
+## Mid-submission results (750-track FMA sample + LibriSpeech dev-clean)
+
+Reference library: 3,217 tracks (700 FMA, 2,517 LibriSpeech) and 2.27 M landmark hashes.
+Vendor benchmark `vendor_synth_001`: 356 files (200 altered copies, 150 unseen clips, 6 broken files).
+
+| Metric | Result | Target |
+|---|---|---|
+| F1 (FLAGGED) | 0.936 | >= 0.92 |
+| Precision | 1.00 (0 false flags) | >= 0.95 |
+| Recall | 0.88 | per transform |
+| QC defects caught | 6 / 6 | all |
+| Screening latency p50 / p95 | 0.40 s / 1.85 s | p95 < 2 s |
+| Batch landed to screened | about 4 min | < 4 h |
+
+Recall is 100% for exact copies, MP3 re-encodes, 8 kHz resampling, 10 s excerpts, gain changes and noise at 20 and 10 dB SNR. All 24 misses are +1 semitone pitch shifts (0% recall), the known limitation of absolute-frequency landmark hashes (docs/03). F1 stays the same for vote thresholds from 8 to 50, so the result doesn't depend on fine threshold tuning.
+
+Evidence is in `results/`: Bronze quality reports, Gold reports and table exports, provenance files and Airflow screenshots.

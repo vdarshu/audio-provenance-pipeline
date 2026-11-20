@@ -1,0 +1,13 @@
+{
+  "batch_id": "vendor_synth_001",
+  "vendor": "synthetic_vendor",
+  "landed_at": "2026-11-20 19:39:19.978861+00:00",
+  "screened_at": "2026-11-20 19:43:02.756825+00:00",
+  "files_screened": 356,
+  "clear": 172,
+  "review": 0,
+  "flagged": 176,
+  "rejected_qc": 8,
+  "pct_clear": "48.31",
+  "p95_latency_ms": 1847.6300659179674
+}

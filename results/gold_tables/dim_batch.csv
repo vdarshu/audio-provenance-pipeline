@@ -1,0 +1,4 @@
+﻿batch_id,role,source,licence,landed_at,ingested_at,screened_at,file_count,valid_count,status
+ref_fma_small,reference,fma_small,per-track CC licence (tracks.csv),2026-11-20 18:30:44.39287+00,2026-11-20 18:31:15.395571+00,,700,700,reference_loaded
+ref_librispeech_dev_clean,reference,librispeech_dev_clean,CC BY 4.0,2026-11-20 18:31:13.65043+00,2026-11-20 18:31:15.394328+00,,2552,2517,reference_loaded
+vendor_synth_001,vendor,synthetic_vendor,vendor-asserted: commercial use permitted,2026-11-20 19:39:19.978861+00,2026-11-20 19:41:26.920808+00,2026-11-20 19:43:02.756825+00,356,348,screened

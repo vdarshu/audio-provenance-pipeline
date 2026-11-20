@@ -1,0 +1,202 @@
+{
+  "batch_id": "vendor_synth_001",
+  "files_in_truth": 356,
+  "scored": 348,
+  "rejected_by_qc": 8,
+  "qc_defects_caught": "6/6",
+  "flagged_only": {
+    "tp": 176,
+    "fp": 0,
+    "fn": 24,
+    "tn": 148,
+    "precision": 1.0,
+    "recall": 0.88,
+    "f1": 0.9362,
+    "accuracy": 0.931
+  },
+  "flagged_or_review": {
+    "tp": 176,
+    "fp": 0,
+    "fn": 24,
+    "tn": 148,
+    "precision": 1.0,
+    "recall": 0.88,
+    "f1": 0.9362,
+    "accuracy": 0.931
+  },
+  "correct_source_identified": 0.88,
+  "recall_by_transform": {
+    "exact_copy": {
+      "n": 10,
+      "recall": 1.0
+    },
+    "gain_minus_6db": {
+      "n": 16,
+      "recall": 1.0
+    },
+    "noise_snr_10db": {
+      "n": 19,
+      "recall": 1.0
+    },
+    "noise_snr_20db": {
+      "n": 16,
+      "recall": 1.0
+    },
+    "pitch_shift_1_semitone": {
+      "n": 24,
+      "recall": 0.0
+    },
+    "reencode_mp3_64k": {
+      "n": 44,
+      "recall": 1.0
+    },
+    "resample_8k": {
+      "n": 28,
+      "recall": 1.0
+    },
+    "trim_10s": {
+      "n": 43,
+      "recall": 1.0
+    }
+  },
+  "threshold_sweep": [
+    {
+      "min_votes": 5,
+      "tp": 176,
+      "fp": 3,
+      "fn": 24,
+      "tn": 145,
+      "precision": 0.9832,
+      "recall": 0.88,
+      "f1": 0.9288,
+      "accuracy": 0.9224
+    },
+    {
+      "min_votes": 8,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 10,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 12,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 15,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 20,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 25,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 30,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 40,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 50,
+      "tp": 176,
+      "fp": 0,
+      "fn": 24,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.88,
+      "f1": 0.9362,
+      "accuracy": 0.931
+    },
+    {
+      "min_votes": 75,
+      "tp": 174,
+      "fp": 0,
+      "fn": 26,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.87,
+      "f1": 0.9305,
+      "accuracy": 0.9253
+    },
+    {
+      "min_votes": 100,
+      "tp": 166,
+      "fp": 0,
+      "fn": 34,
+      "tn": 148,
+      "precision": 1.0,
+      "recall": 0.83,
+      "f1": 0.9071,
+      "accuracy": 0.9023
+    }
+  ],
+  "best_min_votes": 8,
+  "latency_ms": {
+    "p50": 402.6,
+    "p95": 1847.6,
+    "max": 4844.4
+  }
+}

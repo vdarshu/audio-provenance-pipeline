@@ -1,0 +1,13 @@
+{
+  "batch_id": "ref_librispeech_dev_clean",
+  "files": 2552,
+  "valid": 2517,
+  "valid_ratio": 0.9863,
+  "failure_reasons": {
+    "too_short": 35
+  },
+  "total_duration_h": 5.08,
+  "sample_rates": {
+    "16000": 2552
+  }
+}

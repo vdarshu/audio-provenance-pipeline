@@ -71,7 +71,8 @@ def ingest_batch(role, batch_id, force=False):
         df = pd.DataFrame(rows)
         df = source_metadata.enrich(df, source, default_licence=meta.get("licence"))
         out_manifest.parent.mkdir(parents=True, exist_ok=True)
-        df.to_parquet(out_manifest, index=False)
+        df.to_parquet(out_manifest, index=False, coerce_timestamps="us",
+                      allow_truncated_timestamps=True)
 
         with db.cursor() as cur:
             cur.execute(

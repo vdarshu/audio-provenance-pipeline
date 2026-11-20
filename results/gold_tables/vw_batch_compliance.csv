@@ -1,0 +1,2 @@
+﻿batch_id,vendor,landed_at,screened_at,files_screened,clear,review,flagged,rejected_qc,pct_clear,p95_latency_ms
+vendor_synth_001,synthetic_vendor,2026-11-20 19:39:19.978861+00,2026-11-20 19:43:02.756825+00,356,172,0,176,8,48.31,1847.6300659179674
